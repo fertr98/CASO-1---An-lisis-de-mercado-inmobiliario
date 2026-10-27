@@ -47,9 +47,9 @@ En este ejemplo los KPIs son directos:
 
 ## DATOS
 
-Ir a https://insideairbnb.com/get-the-data/ y elegir la ciudad de interés.
+listings : https://data.insideairbnb.com/spain/comunidad-de-madrid/madrid/2026-09-17/visualisations/listings.csv
 
-Buscar los archivos listings.csv y 	listings.csv.gz y crear otro archivo urls_datos.md en docs con sus urls.
+listings_det : https://data.insideairbnb.com/spain/comunidad-de-madrid/madrid/2026-09-17/data/listings.csv.gz
 
 ---
 
