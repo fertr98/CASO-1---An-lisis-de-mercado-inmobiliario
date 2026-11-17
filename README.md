@@ -1,1108 +1,223 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Informe ejecutivo de análisis del mercado de alquiler turístico en Madrid.">
-  <title>Informe ejecutivo | Mercado inmobiliario turístico en Madrid</title>
-  <style>
-    :root {
-      --ink: #17212b;
-      --muted: #5d6873;
-      --navy: #102b3f;
-      --blue: #176b87;
-      --teal: #4b9291;
-      --paper: #fff;
-      --canvas: #eef1f2;
-      --line: #d9e0e3;
-      --soft: #f3f6f6;
-      --accent: #c48a43;
-      --good: #477c68;
-      --warn: #a86c3c;
-      --serif: Georgia, "Times New Roman", serif;
-      --sans: Arial, Helvetica, sans-serif;
-    }
-
-    * {
-      box-sizing: border-box
-    }
-
-    html {
-      scroll-behavior: smooth
-    }
-
-    body {
-      margin: 0;
-      background: var(--canvas);
-      color: var(--ink);
-      font: 15px/1.62 var(--sans)
-    }
-
-    a {
-      color: var(--blue);
-      text-decoration: none
-    }
-
-    a:hover {
-      text-decoration: underline
-    }
-
-    .page {
-      max-width: 1180px;
-      margin: 0 auto;
-      background: var(--paper);
-      min-height: 100vh;
-      box-shadow: 0 8px 35px rgba(20, 39, 49, .08)
-    }
-
-    .topline {
-      height: 7px;
-      background: var(--navy)
-    }
-
-    .masthead {
-      padding: 26px 66px 18px;
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      align-items: center
-    }
-
-    .brand {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--navy)
-    }
-
-    .meta {
-      font-size: 11px;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      text-align: right
-    }
-
-    main {
-      padding: 0 66px 70px
-    }
-
-    .cover {
-      padding: 62px 0 44px;
-      border-bottom: 1px solid var(--line)
-    }
-
-    .kicker,
-    .eyebrow {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--blue)
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    p {
-      margin-top: 0
-    }
-
-    h1 {
-      font: normal clamp(36px, 5vw, 58px)/1.08 var(--serif);
-      letter-spacing: -.035em;
-      color: var(--navy);
-      max-width: 900px;
-      margin: 16px 0 20px
-    }
-
-    .deck {
-      font: 20px/1.5 var(--serif);
-      color: #42515b;
-      max-width: 850px;
-      margin: 0 0 24px
-    }
-
-    .cover-meta {
-      display: flex;
-      gap: 28px;
-      flex-wrap: wrap;
-      color: var(--muted);
-      font-size: 12px
-    }
-
-    .cover-meta strong {
-      color: var(--ink);
-      font-weight: 700
-    }
-
-    .toc {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      padding: 18px 0;
-      border-bottom: 1px solid var(--line);
-      font-size: 12px
-    }
-
-    .toc a {
-      color: var(--muted);
-      font-weight: 700
-    }
-
-    section {
-      padding: 44px 0 8px;
-      border-bottom: 1px solid var(--line);
-      scroll-margin-top: 20px
-    }
-
-    .section-kicker {
-      font-size: 11px;
-      color: var(--blue);
-      font-weight: 700;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      margin-bottom: 8px
-    }
-
-    h2 {
-      font: normal 32px/1.18 var(--serif);
-      letter-spacing: -.02em;
-      color: var(--navy);
-      margin-bottom: 16px
-    }
-
-    h3 {
-      font-size: 17px;
-      line-height: 1.35;
-      color: var(--navy);
-      margin-bottom: 10px
-    }
-
-    h4 {
-      font-size: 12px;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 13px
-    }
-
-    .lead {
-      font: 19px/1.58 var(--serif);
-      color: #34434d;
-      max-width: 960px
-    }
-
-    p {
-      margin-bottom: 14px
-    }
-
-    .thesis {
-      border-left: 4px solid var(--accent);
-      padding: 7px 0 7px 22px;
-      margin: 26px 0 30px;
-      font: 22px/1.48 var(--serif);
-      color: var(--navy);
-      max-width: 980px
-    }
-
-    .kpis {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-      margin: 28px 0
-    }
-
-    .kpi {
-      padding: 20px 18px 19px 0;
-      border-right: 1px solid var(--line);
-      margin-right: 18px
-    }
-
-    .kpi:last-child {
-      border: 0;
-      margin: 0
-    }
-
-    .kpi-label {
-      font-size: 10px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      font-weight: 700
-    }
-
-    .kpi-value {
-      font: 34px/1.15 var(--serif);
-      color: var(--navy);
-      margin: 7px 0
-    }
-
-    .kpi-note {
-      font-size: 12px;
-      line-height: 1.45;
-      color: var(--muted)
-    }
-
-    .pyramid {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
-      margin: 25px 0 10px
-    }
-
-    .pyramid div {
-      padding: 14px 12px;
-      background: var(--soft);
-      border-top: 4px solid var(--blue);
-      min-height: 90px
-    }
-
-    .pyramid div:nth-child(2) {
-      border-color: #39858a
-    }
-
-    .pyramid div:nth-child(3) {
-      border-color: #7c9991
-    }
-
-    .pyramid div:nth-child(4) {
-      border-color: #b38a54
-    }
-
-    .pyramid div:nth-child(5) {
-      border-color: #8c969b
-    }
-
-    .pyramid b {
-      display: block;
-      font-size: 12px;
-      color: var(--navy);
-      margin-bottom: 5px
-    }
-
-    .pyramid span {
-      font-size: 11px;
-      color: var(--muted);
-      line-height: 1.35;
-      display: block
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 34px;
-      align-items: start;
-      margin: 24px 0
-    }
-
-    .grid-2.equal {
-      grid-template-columns: 1fr 1fr
-    }
-
-    .callout {
-      background: var(--soft);
-      padding: 21px 23px;
-      border-top: 3px solid var(--blue);
-      margin: 22px 0
-    }
-
-    .callout .label {
-      font-size: 10px;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--blue);
-      margin-bottom: 8px
-    }
-
-    .callout p:last-child {
-      margin-bottom: 0
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-      margin: 16px 0 22px
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px
-    }
-
-    th {
-      text-align: left;
-      background: #edf2f3;
-      color: #45545d;
-      font-size: 10px;
-      letter-spacing: .09em;
-      text-transform: uppercase;
-      padding: 11px 12px
-    }
-
-    td {
-      padding: 11px 12px;
-      border-bottom: 1px solid var(--line);
-      vertical-align: top
-    }
-
-    tbody tr:nth-child(even) {
-      background: #fafbfb
-    }
-
-    td strong {
-      color: var(--navy)
-    }
-
-    .num {
-      text-align: right;
-      font-variant-numeric: tabular-nums;
-      white-space: nowrap
-    }
-
-    .chart {
-      border: 1px solid var(--line);
-      padding: 20px 20px 14px;
-      margin: 16px 0 22px
-    }
-
-    .chart-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--navy);
-      margin-bottom: 4px
-    }
-
-    .chart-sub {
-      font-size: 11px;
-      color: var(--muted);
-      margin-bottom: 18px
-    }
-
-    .bar-row {
-      display: grid;
-      grid-template-columns: 118px 1fr 70px;
-      gap: 12px;
-      align-items: center;
-      margin: 13px 0;
-      font-size: 12px
-    }
-
-    .bar-label {
-      color: #45545d
-    }
-
-    .bar-track {
-      height: 12px;
-      background: #edf1f2
-    }
-
-    .bar {
-      height: 100%;
-      background: var(--blue)
-    }
-
-    .bar.teal {
-      background: var(--teal)
-    }
-
-    .bar.gold {
-      background: var(--accent)
-    }
-
-    .bar-value {
-      text-align: right;
-      font-weight: 700;
-      color: var(--navy);
-      font-variant-numeric: tabular-nums
-    }
-
-    .chart-foot {
-      font-size: 10px;
-      color: var(--muted);
-      margin-top: 14px
-    }
-
-    .heatmap {
-      display: grid;
-      grid-template-columns: 145px repeat(3, 1fr);
-      gap: 3px;
-      margin: 16px 0 8px;
-      background: #fff
-    }
-
-    .heatmap div {
-      padding: 12px 8px;
-      text-align: center;
-      background: #edf2f3;
-      font-size: 12px
-    }
-
-    .heatmap .head {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      color: #45545d
-    }
-
-    .heatmap .row {
-      font-weight: 700;
-      text-align: left;
-      color: var(--navy);
-      background: #f7f8f8
-    }
-
-    .heatmap .v1 {
-      background: #e8efec
-    }
-
-    .heatmap .v2 {
-      background: #d5e5de
-    }
-
-    .heatmap .v3 {
-      background: #b6d4c7
-    }
-
-    .heatmap .v4 {
-      background: #8ebaa7;
-      color: #102b3f
-    }
-
-    .heatmap .v5 {
-      background: #5f9880;
-      color: white
-    }
-
-    .note {
-      font-size: 11px;
-      color: var(--muted);
-      line-height: 1.5
-    }
-
-    .recommendations {
-      counter-reset: rec;
-      list-style: none;
-      padding: 0;
-      margin: 22px 0
-    }
-
-    .recommendations li {
-      counter-increment: rec;
-      display: grid;
-      grid-template-columns: 42px 1fr;
-      gap: 14px;
-      padding: 17px 0;
-      border-top: 1px solid var(--line)
-    }
-
-    .recommendations li:before {
-      content: "0" counter(rec);
-      font: 22px var(--serif);
-      color: var(--accent)
-    }
-
-    .recommendations strong {
-      display: block;
-      color: var(--navy);
-      margin-bottom: 4px
-    }
-
-    .caveat {
-      background: #f7f5f0;
-      border-left: 3px solid var(--accent);
-      padding: 16px 18px;
-      font-size: 12px;
-      color: #5d5143;
-      margin: 22px 0
-    }
-
-    .footer {
-      padding: 26px 66px 38px;
-      background: #f7f9f9;
-      color: var(--muted);
-      font-size: 11px;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px
-    }
-
-    .smallcaps {
-      font-size: 10px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      font-weight: 700
-    }
-
-    @media(max-width:760px) {
-      .masthead {
-        padding: 20px 24px
-      }
-
-      .meta {
-        text-align: left
-      }
-
-      main {
-        padding: 0 24px 45px
-      }
-
-      .cover {
-        padding: 42px 0 32px
-      }
-
-      .kpis {
-        grid-template-columns: repeat(2, 1fr)
-      }
-
-      .kpi:nth-child(2) {
-        border-right: 0
-      }
-
-      .kpi:nth-child(3) {
-        border-top: 1px solid var(--line)
-      }
-
-      .pyramid {
-        grid-template-columns: 1fr 1fr
-      }
-
-      .grid-2,
-      .grid-2.equal {
-        grid-template-columns: 1fr;
-        gap: 12px
-      }
-
-      .footer {
-        padding: 24px;
-        display: block
-      }
-
-      .bar-row {
-        grid-template-columns: 95px 1fr 58px
-      }
-    }
-
-    @media print {
-      @page {
-        size: A4;
-        margin: 16mm 15mm
-      }
-
-      body {
-        background: #fff;
-        font-size: 10pt
-      }
-
-      .page {
-        box-shadow: none;
-        max-width: none
-      }
-
-      .masthead {
-        padding: 0 0 12px
-      }
-
-      main {
-        padding: 0
-      }
-
-      .cover {
-        padding: 32px 0 24px
-      }
-
-      section {
-        padding: 28px 0 4px;
-        break-inside: avoid
-      }
-
-      .chart,
-      .callout,
-      .kpi,
-      .table-wrap {
-        break-inside: avoid
-      }
-
-      .toc {
-        display: none
-      }
-
-      .footer {
-        padding: 20px 0;
-        background: #fff
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="page">
-    <div class="topline"></div>
-    <header class="masthead">
-      <div class="brand">Business Analytics · Informe de mercado</div>
-      <div class="meta">Madrid · Alquiler turístico<br>Informe ejecutivo</div>
-    </header>
-    <main>
-      <header class="cover">
-        <div class="kicker">Análisis de mercado · Madrid</div>
-        <h1>Invertir en alquiler turístico: el rendimiento depende del activo, no solo de la ubicación</h1>
-        <p class="deck">Evaluación de precios, ocupación estimada, tipología de alojamiento y margen bruto para
-          identificar los segmentos con mayor potencial relativo de inversión.</p>
-        <div class="cover-meta">
-          <span><strong>Universo analizado</strong> · 11.771 anuncios</span>
-          <span><strong>Ámbito</strong> · Madrid</span>
-          <span><strong>Enfoque</strong> · Business Analytics</span>
-        </div>
-      </header>
-
-      <nav class="toc" aria-label="Índice del informe">
-        <a href="#conclusion">Conclusión ejecutiva</a>
-        <a href="#mercado">Mercado y localización</a>
-        <a href="#producto">Tipología del activo</a>
-        <a href="#ocupacion">Ocupación</a>
-        <a href="#competencia">Competencia</a>
-        <a href="#recomendacion">Recomendación</a>
-      </nav>
-
-      <section id="conclusion">
-        <div class="section-kicker">01 · Respuesta ejecutiva</div>
-        <h2>La vivienda completa presenta el perfil económico más atractivo dentro de la muestra</h2>
-        <p class="lead">Los datos apuntan a una ventaja clara de los apartamentos completos frente a las habitaciones
-          privadas y compartidas en precio medio por noche y margen bruto. La localización sigue siendo relevante, pero
-          los distritos con precios más altos no son automáticamente los que ofrecen la mejor eficiencia de inversión.
-        </p>
-        <div class="thesis">La prioridad analítica debe ser identificar viviendas completas con capacidad suficiente,
-          demanda sostenida y un coste de adquisición compatible con los ingresos esperados; no seleccionar únicamente
-          por el precio de alquiler más elevado.</div>
-
-        <div class="kpis">
-          <div class="kpi">
-            <div class="kpi-label">Anuncios analizados</div>
-            <div class="kpi-value">11.771</div>
-            <div class="kpi-note">Cartera de inmuebles turísticos de Madrid.</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-label">Precio medio / noche</div>
-            <div class="kpi-value">180,36 €</div>
-            <div class="kpi-note">Mediana: 154 €. Existe dispersión por barrio y tipología.</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-label">Ocupación estimada</div>
-            <div class="kpi-value">~145 días</div>
-            <div class="kpi-note">Variación entre distritos y tipos de alojamiento.</div>
-          </div>
-          <div class="kpi">
-            <div class="kpi-label">Margen bruto medio</div>
-            <div class="kpi-value">~9,6 %</div>
-            <div class="kpi-note">El mayor margen medio corresponde a viviendas completas.</div>
-          </div>
-        </div>
-
-        <h3>La lógica de la conclusión: de la recomendación a la evidencia</h3>
-        <div class="pyramid">
-          <div><b>Conclusión</b><span>Priorizar viviendas completas con economía unitaria sólida.</span></div>
-          <div><b>01 · Tipología</b><span>Mayor precio por noche y margen bruto medio.</span></div>
-          <div><b>02 · Demanda</b><span>La ocupación diferencia el rendimiento operativo.</span></div>
-          <div><b>03 · Localización</b><span>Precio alto no equivale necesariamente a mayor rentabilidad.</span></div>
-          <div><b>04 · Evidencia</b><span>Comparativas por distrito, alojamiento y margen.</span></div>
-        </div>
-        <div class="callout">
-          <div class="label">Conclusión principal</div>
-          <p>Los apartamentos completos alcanzan un precio medio de <strong>211,76 € por noche</strong> y un margen
-            bruto medio del <strong>9,61 %</strong>. Las habitaciones privadas registran 94,44 € y 4,43 %, mientras que
-            las compartidas alcanzan 31,37 € y 1,15 %.</p>
-        </div>
-        <div class="callout">
-          <div class="label">Implicación geográfica</div>
-          <p>Barrio de Salamanca y Centro lideran los precios medios, pero el análisis de ocupación destaca también
-            Barajas, Villa de Vallecas y Arganzuela. La decisión final requiere combinar ingresos, ocupación y coste de
-            adquisición por metro cuadrado.</p>
-        </div>
-      </section>
-
-      <section id="mercado">
-        <div class="section-kicker">02 · Insight funcional 1</div>
-        <h2>La localización determina el nivel de precios, pero no basta para decidir dónde invertir</h2>
-        <p class="lead">Barrio de Salamanca, Centro y Chamberí presentan los precios medios por noche más elevados de
-          los distritos incluidos en la comparación. Sin embargo, el precio debe interpretarse junto con la ocupación y
-          el coste de adquisición del inmueble.</p>
-        <div class="grid-2">
-          <div>
-            <h3>Precio medio por distrito</h3>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Distrito</th>
-                    <th class="num">Precio medio</th>
-                    <th class="num">Anuncios</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>Barrio de Salamanca</strong></td>
-                    <td class="num">241,70 €</td>
-                    <td class="num">701</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Centro</strong></td>
-                    <td class="num">210,85 €</td>
-                    <td class="num">5.212</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Chamberí</strong></td>
-                    <td class="num">189,66 €</td>
-                    <td class="num">600</td>
-                  </tr>
-                  <tr>
-                    <td>Retiro</td>
-                    <td class="num">184,52 €</td>
-                    <td class="num">423</td>
-                  </tr>
-                  <tr>
-                    <td>Chamartín</td>
-                    <td class="num">184,01 €</td>
-                    <td class="num">414</td>
-                  </tr>
-                  <tr>
-                    <td>Moncloa</td>
-                    <td class="num">171,87 €</td>
-                    <td class="num">288</td>
-                  </tr>
-                  <tr>
-                    <td>Arganzuela</td>
-                    <td class="num">165,48 €</td>
-                    <td class="num">614</td>
-                  </tr>
-                  <tr>
-                    <td>Tetuán</td>
-                    <td class="num">144,50 €</td>
-                    <td class="num">800</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="chart">
-            <div class="chart-title">Precio medio por noche</div>
-            <div class="chart-sub">Distritos con mayor precio medio · euros</div>
-            <div class="bar-row"><span class="bar-label">Salamanca</span>
-              <div class="bar-track">
-                <div class="bar" style="width:100%"></div>
-              </div><span class="bar-value">241,70</span>
-            </div>
-            <div class="bar-row"><span class="bar-label">Centro</span>
-              <div class="bar-track">
-                <div class="bar" style="width:87.2%"></div>
-              </div><span class="bar-value">210,85</span>
-            </div>
-            <div class="bar-row"><span class="bar-label">Chamberí</span>
-              <div class="bar-track">
-                <div class="bar" style="width:78.5%"></div>
-              </div><span class="bar-value">189,66</span>
-            </div>
-            <div class="bar-row"><span class="bar-label">Retiro</span>
-              <div class="bar-track">
-                <div class="bar" style="width:76.3%"></div>
-              </div><span class="bar-value">184,52</span>
-            </div>
-            <div class="bar-row"><span class="bar-label">Chamartín</span>
-              <div class="bar-track">
-                <div class="bar" style="width:76.1%"></div>
-              </div><span class="bar-value">184,01</span>
-            </div>
-            <div class="bar-row"><span class="bar-label">Moncloa</span>
-              <div class="bar-track">
-                <div class="bar" style="width:71.1%"></div>
-              </div><span class="bar-value">171,87</span>
-            </div>
-            <div class="bar-row"><span class="bar-label">Arganzuela</span>
-              <div class="bar-track">
-                <div class="bar" style="width:68.5%"></div>
-              </div><span class="bar-value">165,48</span>
-            </div>
-            <div class="bar-row"><span class="bar-label">Tetuán</span>
-              <div class="bar-track">
-                <div class="bar" style="width:59.8%"></div>
-              </div><span class="bar-value">144,50</span>
-            </div>
-            <div class="chart-foot">Fuente: valores incluidos en el análisis proporcionado.</div>
-          </div>
-        </div>
-        <div class="callout">
-          <div class="label">Lectura para la inversión</div>
-          <p>Los distritos premium pueden sostener tarifas superiores, pero el análisis no permite concluir que sean los
-            más rentables sin incorporar el precio de compra y los costes asociados de cada activo. La comparación debe
-            realizarse sobre el rendimiento esperado, no sobre el ingreso por noche aislado.</p>
-        </div>
-      </section>
-
-      <section id="producto">
-        <div class="section-kicker">03 · Insight funcional 2</div>
-        <h2>La tipología del alojamiento es el principal factor diferencial observado en precio y margen</h2>
-        <p class="lead">Los apartamentos completos concentran la mayor parte de la muestra y presentan resultados
-          superiores en las dos métricas económicas incluidas: precio medio por noche y margen bruto medio.</p>
-        <div class="grid-2">
-          <div>
-            <h3>Precio por tipo de alojamiento</h3>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Tipo</th>
-                    <th class="num">Precio medio</th>
-                    <th class="num">Mediana</th>
-                    <th class="num">Anuncios</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>Vivienda completa</strong></td>
-                    <td class="num">211,76 €</td>
-                    <td class="num">179 €</td>
-                    <td class="num">8.654</td>
-                  </tr>
-                  <tr>
-                    <td>Habitación privada</td>
-                    <td class="num">94,44 €</td>
-                    <td class="num">74 €</td>
-                    <td class="num">3.054</td>
-                  </tr>
-                  <tr>
-                    <td>Habitación compartida</td>
-                    <td class="num">31,37 €</td>
-                    <td class="num">24 €</td>
-                    <td class="num">63</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="chart">
-            <div class="chart-title">Margen bruto medio por tipología</div>
-            <div class="chart-sub">Porcentaje · comparación entre tipos</div>
-            <div class="bar-row"><span class="bar-label">Vivienda completa</span>
-              <div class="bar-track">
-                <div class="bar" style="width:100%"></div>
-              </div><span class="bar-value">9,61 %</span>
-            </div>
-            <div class="bar-row"><span class="bar-label">Privada</span>
-              <div class="bar-track">
-                <div class="bar teal" style="width:46.1%"></div>
-              </div><span class="bar-value">4,43 %</span>
-            </div>
-            <div class="bar-row"><span class="bar-label">Compartida</span>
-              <div class="bar-track">
-                <div class="bar gold" style="width:12%"></div>
-              </div><span class="bar-value">1,15 %</span>
-            </div>
-            <div class="chart-foot">La longitud de las barras está normalizada respecto al 9,61 %.</div>
-          </div>
-        </div>
-        <div class="callout">
-          <div class="label">Implicación sobre el producto</div>
-          <p>La hipótesis prioritaria es estudiar viviendas completas de tamaño medio o grande, especialmente de 2 a 4
-            dormitorios y con capacidad para 4–5 o más huéspedes. El análisis aportado señala que estos perfiles pueden
-            alcanzar precios superiores; no incluye, sin embargo, una tabla numérica completa por número de dormitorios
-            y capacidad.</p>
-        </div>
-      </section>
-
-      <section id="ocupacion">
-        <div class="section-kicker">04 · Insight funcional 3</div>
-        <h2>La ocupación es el factor operativo que permite convertir la tarifa en ingresos recurrentes</h2>
-        <p class="lead">La mediana de días ocupados varía entre distritos. Barajas destaca en la comparación disponible,
-          seguido de Villa de Vallecas, Centro y Arganzuela.</p>
-        <div class="grid-2">
-          <div>
-            <h3>Ocupación estimada por distrito</h3>
-            <div class="table-wrap">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Distrito</th>
-                    <th class="num">Mediana de ocupación</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>Barajas</strong></td>
-                    <td class="num">192 días</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Villa de Vallecas</strong></td>
-                    <td class="num">168 días</td>
-                  </tr>
-                  <tr>
-                    <td>Centro</td>
-                    <td class="num">156 días</td>
-                  </tr>
-                  <tr>
-                    <td>Arganzuela</td>
-                    <td class="num">156 días</td>
-                  </tr>
-                  <tr>
-                    <td>Chamberí</td>
-                    <td class="num">~150 días</td>
-                  </tr>
-                  <tr>
-                    <td>Moncloa</td>
-                    <td class="num">~130 días</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div class="chart">
-            <div class="chart-title">Días de ocupación estimada</div>
-            <div class="chart-sub">Mediana por distrito · días</div>
-            <div class="bar-row"><span class="bar-label">Barajas</span>
-              <div class="bar-track">
-                <div class="bar" style="width:100%"></div>
-              </div><span class="bar-value">192</span>
-            </div>
-            <div class="bar-row"><span class="bar-label">Villa Vallecas</span>
-              <div class="bar-track">
-                <div class="bar" style="width:87.5%"></div>
-              </div><span class="bar-value">168</span>
-            </div>
-            <div class="bar-row"><span class="bar-label">Centro</span>
-              <div class="bar-track">
-                <div class="bar teal" style="width:81.3%"></div>
-              </div><span class="bar-value">156</span>
-            </div>
-            <div class="bar-row"><span class="bar-label">Arganzuela</span>
-              <div class="bar-track">
-                <div class="bar teal" style="width:81.3%"></div>
-              </div><span class="bar-value">156</span>
-            </div>
-            <div class="bar-row"><span class="bar-label">Chamberí</span>
-              <div class="bar-track">
-                <div class="bar gold" style="width:78.1%"></div>
-              </div><span class="bar-value">~150</span>
-            </div>
-            <div class="bar-row"><span class="bar-label">Moncloa</span>
-              <div class="bar-track">
-                <div class="bar gold" style="width:67.7%"></div>
-              </div><span class="bar-value">~130</span>
-            </div>
-            <div class="chart-foot">Los valores aproximados se mantienen como aproximados.</div>
-          </div>
-        </div>
-        <div class="callout">
-          <div class="label">Lectura para la inversión</div>
-          <p>Una tarifa elevada no garantiza por sí sola un mayor ingreso anual. La ocupación observada debe analizarse
-            conjuntamente con el precio medio, la estacionalidad y el coste total de explotación. La información
-            facilitada no incluye series mensuales, por lo que no permite evaluar estacionalidad.</p>
-        </div>
-      </section>
-
-      <section id="competencia">
-        <div class="section-kicker">05 · Insight funcional 4</div>
-        <h2>La oferta y la segmentación por barrio deben incorporarse a la evaluación del activo</h2>
-        <p class="lead">El análisis original señala una relación positiva moderada entre cantidad de anuncios y precio
-          medio, y advierte de que la concentración de oferta puede intensificar la presión competitiva. La comparación
-          de margen por distrito y tipología permite observar diferencias relevantes entre segmentos.</p>
-        <h3>Margen bruto mediano por distrito y tipo de alojamiento</h3>
-        <div class="heatmap" role="table" aria-label="Margen bruto mediano por distrito y tipo">
-          <div class="head">Distrito / tipo</div>
-          <div class="head">Completa</div>
-          <div class="head">Privada</div>
-          <div class="head">Compartida</div>
-          <div class="row">Centro</div>
-          <div class="v4">12,4 %</div>
-          <div class="v2">6,7 %</div>
-          <div class="v1">1,8 %</div>
-          <div class="row">Salamanca</div>
-          <div class="v5">14,1 %</div>
-          <div class="v3">8,9 %</div>
-          <div class="v1">2,2 %</div>
-          <div class="row">Chamberí</div>
-          <div class="v4">10,8 %</div>
-          <div class="v2">6,2 %</div>
-          <div class="v1">1,4 %</div>
-          <div class="row">Latina</div>
-          <div class="v4">13,6 %</div>
-          <div class="v2">7,0 %</div>
-          <div class="v1">1,6 %</div>
-          <div class="row">Usera</div>
-          <div class="v4">11,2 %</div>
-          <div class="v2">4,8 %</div>
-          <div class="v1">1,1 %</div>
-          <div class="row">Carabanchel</div>
-          <div class="v3">10,3 %</div>
-          <div class="v2">4,5 %</div>
-          <div class="v1">0,9 %</div>
-        </div>
-        <p class="note">Valores reproducidos de la tabla de análisis facilitada. La escala de sombreado es orientativa y
-          no sustituye a la lectura de los porcentajes.</p>
-        <div class="callout">
-          <div class="label">Lectura para la inversión</div>
-          <p>En los seis distritos mostrados, la vivienda completa presenta un margen mediano superior al de las
-            habitaciones privadas y compartidas. Salamanca registra el mayor valor de la tabla (14,1 %), seguido de
-            Latina (13,6 %) y Centro (12,4 %). Estos resultados deben interpretarse teniendo en cuenta el tamaño de
-            muestra de cada cruce, que no se facilita en el informe original.</p>
-        </div>
-      </section>
-
-      <section id="recomendacion">
-        <div class="section-kicker">06 · Decisión y próximos pasos</div>
-        <h2>Priorizar activos completos y validar la rentabilidad con el coste total de adquisición</h2>
-        <p class="lead">La evidencia disponible justifica orientar la búsqueda hacia viviendas completas, pero no
-          permite recomendar una compra concreta ni establecer un ranking definitivo de barrios sin integrar precios de
-          adquisición, gastos operativos y requisitos regulatorios.</p>
-        <ol class="recommendations">
-          <li>
-            <div><strong>Priorizar viviendas completas.</strong> Es la tipología con mayor precio medio por noche y
-              margen bruto medio dentro de la muestra analizada.</div>
-          </li>
-          <li>
-            <div><strong>Evaluar inmuebles de 2 a 4 dormitorios.</strong> El análisis identifica este perfil y
-              capacidades de 4–5 o más huéspedes como candidatos, aunque conviene validar la ventaja con datos
-              desglosados por tamaño y capacidad.</div>
-          </li>
-          <li>
-            <div><strong>Comparar distritos por rendimiento, no por tarifa.</strong> Integrar precio por noche,
-              ocupación estimada y coste de adquisición por metro cuadrado antes de priorizar una zona.</div>
-          </li>
-          <li>
-            <div><strong>Incorporar competencia a escala de barrio.</strong> Contrastar número de anuncios, nivel de
-              precios y margen para detectar segmentos con oferta elevada o señales de saturación.</div>
-          </li>
-          <li>
-            <div><strong>Realizar una due diligence del activo.</strong> Añadir gastos, financiación, impuestos,
-              mantenimiento, gestión, licencias y normativa aplicable para pasar de margen bruto estimado a rentabilidad
-              neta viable.</div>
-          </li>
-        </ol>
-        <div class="caveat"><strong>Alcance y cautelas.</strong> Este informe reorganiza y presenta los resultados
-          incluidos en el documento de partida; no recalcula las métricas ni verifica la base de datos original. El
-          margen se denomina “bruto” y no debe interpretarse como rentabilidad neta del inversor. La ocupación se
-          presenta como estimada. Antes de tomar decisiones de inversión deben validarse la metodología de cálculo, la
-          fecha de extracción, la representatividad de la muestra, el coste de adquisición y la viabilidad normativa de
-          cada inmueble.</div>
-      </section>
-    </main>
-    <footer class="footer">
-      <div>
-        <div class="smallcaps">Business Analytics · Madrid</div>
-        <div>Informe ejecutivo de mercado inmobiliario turístico</div>
-      </div>
-      <div>Documento de análisis · Cifras según resultados proporcionados</div>
-    </footer>
-  </div>
-</body>
-
-</html>
+# Análisis del mercado inmobiliario turístico de Madrid
+### Business Analytics · Exploratory Data Analysis · Geospatial Analysis
+
+Análisis de mercado orientado a identificar oportunidades de inversión en el sector del alquiler turístico en Madrid, mediante el estudio de precios, ocupación estimada, tipología de alojamiento, competencia y márgenes brutos.
+
+El proyecto combina análisis exploratorio de datos (EDA), segmentación de mercado y visualización geoespacial para transformar datos de anuncios inmobiliarios en información útil para la toma de decisiones empresariales.
+
+---
+
+## 1. Objetivo del proyecto
+
+El objetivo es analizar la estructura del mercado de alquiler turístico en Madrid para identificar qué características de los inmuebles y qué segmentos geográficos presentan un mayor potencial económico.
+
+El análisis busca responder a cinco cuestiones principales:
+
+- **Localización:** ¿Qué distritos presentan los precios medios por noche más elevados?
+- **Tipología:** ¿Qué tipo de alojamiento ofrece mejores indicadores económicos?
+- **Ocupación:** ¿Qué zonas presentan una mayor demanda estimada?
+- **Competencia:** ¿Cómo se distribuye la oferta y qué diferencias existen entre segmentos?
+- **Rentabilidad:** ¿Qué combinación de características puede resultar más interesante desde una perspectiva de inversión?
+
+## 2. Dataset
+
+El análisis parte de una muestra de **11.771 anuncios de alojamientos turísticos en Madrid**.
+
+Se trabaja con información relativa a las características de los inmuebles, su localización geográfica y diferentes indicadores económicos y operativos.
+
+Entre las variables de interés se encuentran:
+
+| Dimensión | Variables analizadas |
+|---|---|
+| Localización | Distrito, barrio, latitud y longitud |
+| Alojamiento | Tipo de propiedad, capacidad y dormitorios |
+| Precio | Precio medio por noche |
+| Demanda | Días de ocupación estimada |
+| Competencia | Número y distribución de anuncios |
+| Indicadores económicos | Margen bruto estimado |
+
+## 3. Metodología
+
+El proyecto sigue un flujo de trabajo orientado al análisis de negocio:
+
+**01. Exploratory Data Analysis (EDA)**
+
+- Exploración de la estructura y calidad del conjunto de datos.
+- Análisis de distribuciones y estadísticas descriptivas.
+- Identificación de valores atípicos y patrones relevantes.
+- Análisis de variables geográficas, económicas y operativas.
+
+**02. Segmentación del mercado**
+
+- Comparación de precios entre distritos y barrios.
+- Análisis por tipología de alojamiento.
+- Evaluación de la ocupación estimada.
+- Comparación de márgenes brutos entre segmentos.
+- Estudio de la concentración de la oferta.
+
+**03. Análisis geoespacial**
+
+Se desarrolla una visualización interactiva mediante **Folium** para representar geográficamente los anuncios y analizar su distribución espacial.
+
+El mapa incorpora marcadores geolocalizados y una codificación visual basada en el margen bruto estimado, facilitando la identificación de patrones territoriales y posibles concentraciones de oportunidades.
+
+**04. Interpretación de resultados**
+
+Los resultados se traducen en conclusiones orientadas a negocio, priorizando la identificación de segmentos atractivos frente a una interpretación exclusivamente descriptiva de los datos.
+
+**05. Comunicación ejecutiva**
+
+Se desarrolla un informe ejecutivo en HTML que sintetiza los principales hallazgos, presenta evidencias cuantitativas y formula recomendaciones estratégicas siguiendo una estructura de comunicación piramidal: conclusión, argumentos y evidencias.
+
+## 4. Principales resultados
+
+El análisis identifica diferencias relevantes entre las tipologías de alojamiento y los segmentos geográficos.
+
+### 4.1. La tipología del inmueble es un factor diferencial
+
+| Tipo de alojamiento | Precio medio/noche | Margen bruto medio |
+|---|---:|---:|
+| Vivienda completa | 211,76 € | 9,61 % |
+| Habitación privada | 94,44 € | 4,43 % |
+| Habitación compartida | 31,37 € | 1,15 % |
+
+Las viviendas completas presentan los indicadores económicos más elevados de la muestra, tanto en precio medio por noche como en margen bruto.
+
+### 4.2. La localización influye en el posicionamiento de precios
+
+Algunos de los distritos con mayores precios medios por noche son:
+
+| Distrito | Precio medio/noche |
+|---|---:|
+| Salamanca | 241,70 € |
+| Centro | 210,85 € |
+| Chamberí | 189,66 € |
+| Retiro | 184,52 € |
+| Chamartín | 184,01 € |
+
+Sin embargo, un precio superior no implica necesariamente una mayor rentabilidad. Es necesario considerar conjuntamente la ocupación, el coste de adquisición y los gastos asociados.
+
+### 4.3. La ocupación introduce una dimensión operativa
+
+Entre los distritos destacados por ocupación estimada se encuentran:
+
+- Barajas: 192 días.
+- Villa de Vallecas: 168 días.
+- Centro: 156 días.
+- Arganzuela: 156 días.
+
+Esto pone de manifiesto la importancia de combinar el potencial de ingresos por noche con la capacidad de generar demanda recurrente.
+
+### 4.4. El margen depende de la combinación de variables
+
+La segmentación por distrito y tipología permite identificar diferencias en los márgenes brutos observados.
+
+Salamanca, Latina y Centro destacan en la comparación de viviendas completas incluida en el informe, aunque estos resultados deben contrastarse con los costes reales de adquisición y explotación.
+
+## 5. Conclusiones estratégicas
+
+A partir de los resultados obtenidos, se plantean las siguientes líneas de actuación:
+
+1. **Priorizar viviendas completas:** presentan los mejores indicadores de precio y margen bruto dentro de la muestra.
+2. **Analizar activos de capacidad media-alta:** estudiar especialmente viviendas de 2 a 4 dormitorios y capacidad para 4-5 o más huéspedes.
+3. **Evaluar zonas por rendimiento potencial:** evitar seleccionar ubicaciones exclusivamente por sus precios medios.
+4. **Incorporar la presión competitiva:** analizar la concentración de anuncios y las diferencias entre barrios.
+5. **Validar la rentabilidad real:** incorporar costes de adquisición, financiación, mantenimiento, impuestos, gestión y requisitos regulatorios.
+
+La principal conclusión es que el potencial de inversión no depende únicamente de la ubicación, sino de la combinación entre características del inmueble, capacidad de generar ingresos y estructura de costes.
+
+---
+
+## 6. Tecnologías y herramientas
+
+| Tecnología | Aplicación |
+|---|---|
+| Python | Desarrollo del análisis |
+| Pandas | Manipulación y análisis de datos |
+| Jupyter Notebook | Desarrollo y documentación del análisis |
+| Folium | Visualización geoespacial interactiva |
+| HTML / CSS | Desarrollo del informe ejecutivo |
+| VS Code | Entorno de desarrollo |
+
+## 7. Entregables
+
+El proyecto genera dos entregables principales:
+
+**1. Mapa interactivo de oportunidades**
+
+Visualización geográfica de los anuncios de Madrid, con marcadores representados mediante una escala visual asociada al margen bruto estimado.
+
+Archivo: `mapa_margen.html`
+
+**2. Informe ejecutivo de mercado**
+
+Documento HTML con los principales indicadores, comparativas, conclusiones y recomendaciones de inversión.
+
+Archivo: `informe_ejecutivo_mercado_inmobiliario_madrid.html`
+
+## 8. Limitaciones del análisis
+
+Los resultados deben interpretarse teniendo en cuenta las siguientes limitaciones:
+
+- La ocupación utilizada es estimada y no equivale necesariamente a ocupación real.
+- El margen bruto no representa la rentabilidad neta del inversor.
+- No se incorpora un modelo completo de costes de adquisición y explotación.
+- No se evalúa de forma exhaustiva la estacionalidad de la demanda.
+- La viabilidad de cada operación depende también de la normativa aplicable y de los requisitos legales del alquiler turístico.
+
+Por tanto, los resultados permiten identificar segmentos interesantes para profundizar en su análisis, pero no constituyen una recomendación de inversión individualizada.
+
+---
+
+## 9. Estructura del proyecto
+
+```text
+CASO 1 - Análisis de mercado inmobiliario/
+│
+├── .git
+├── .github/
+│   └── copilot-instructions.md
+├── .gitignore
+│
+├── datos/
+│   ├── brutos/
+│   │   ├── euros_m2_madrid.csv
+│   │   └── pois.csv
+│   │
+│   ├── intermedios/
+│   │   └── inmobiliario.sqlite
+│   │
+│   └── procesados/
+│       ├── listings_con_price_m2.csv
+│       └── listings_det.csv
+│
+├── docs/
+│   ├── metodologia_minicubos.md
+│   ├── mapa_madrid_poi_score.html
+│   ├── mapa_margen.html
+│   └── proyecto-objetivos.md
+│
+├── entregables/
+│   └── informes/
+│       └── informe_ejecutivo_mercado_inmobiliario_madrid.html
+│
+├── funciones/
+│   ├── __pycache__/
+│   │   ├── funciones.cpython-311.pyc
+│   │   └── funciones.cpython-313.pyc
+│   └── funciones.py
+│
+├── notebooks/
+│   ├── 01_importaciondatos.ipynb
+│   ├── 02_creaciónvariables.ipynb
+│   └── 03_analisis.ipynb
+```
+---
+
+## Autor
+
+Proyecto desarrollado como caso práctico de **Business Analytics**, aplicando técnicas de análisis de datos, segmentación de mercado y visualización para resolver un problema de negocio.
+
+**Fernando Tejada**
+
+[GitHub](https://github.com/) · [LinkedIn](https://www.linkedin.com/)
