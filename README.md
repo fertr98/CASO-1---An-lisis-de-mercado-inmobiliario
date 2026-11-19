@@ -1,3 +1,5 @@
+# informe final web entregable: file:///C:/Users/fishm/Desktop/ds4b_master/BLOQUE%20II%20BUSINESS%20ANALYTICS/000_casos%20business%20analytics/CASO%201%20-%20An%C3%A1lisis%20de%20mercado%20inmobiliario/entregables/informes/informe_ejecutivo_mercado_inmobiliario_madrid.html
+
 # Análisis del mercado inmobiliario turístico de Madrid
 ### Business Analytics · Exploratory Data Analysis · Geospatial Analysis
 
